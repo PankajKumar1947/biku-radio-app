@@ -1,16 +1,27 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const SingleSong = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.mainContainer}>
             <View style={styles.dot}></View>
             <View style={styles.songTrack}>
-                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 5 , flex: 1}}>
+                <TouchableOpacity
+                    onPress={() => {
+                        //@ts-ignore
+                        navigation.navigate('player', {
+                            itemId: 86,
+                            otherParam: 'anything you want here',
+                        } )
+                    }}
+                    style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
                     <Image
                         style={styles.tinyLogo}
                         source={require('../assets/songicon.jpg')} />
                     <Text style={styles.songTitle}>Song Name</Text>
+
                 </TouchableOpacity>
 
                 <View style={styles.songOptions}>

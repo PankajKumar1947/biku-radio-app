@@ -43,13 +43,3 @@ const HomeScreen = () => {
 }
 
 export default HomeScreen
-
-const styles = StyleSheet.create({
-
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-        color: 'white',
-        textAlign: 'center'
-    }
-});

@@ -5,29 +5,25 @@ import { useNavigation } from '@react-navigation/native'
 const SingleSong = () => {
     const navigation = useNavigation();
     return (
-        <View style={styles.mainContainer}>
-            <View style={styles.dot}></View>
-            <View style={styles.songTrack}>
-                <TouchableOpacity
-                    onPress={() => {
-                        //@ts-ignore
-                        navigation.navigate('player', {
-                            itemId: 86,
-                            otherParam: 'anything you want here',
-                        } )
-                    }}
-                    style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
-                    <Image
-                        style={styles.tinyLogo}
-                        source={require('../assets/songicon.jpg')} />
-                    <Text style={styles.songTitle}>Song Name</Text>
+        <View style={styles.songTrack}>
+            <TouchableOpacity
+                onPress={() => {
+                    //@ts-ignore
+                    navigation.navigate('player', {
+                        itemId: 86,
+                        otherParam: 'anything you want here',
+                    })
+                }}
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
+                <Image
+                    style={styles.tinyLogo}
+                    source={require('../assets/songicon.jpg')} />
+                <Text style={styles.songTitle}>Song Name</Text>
+            </TouchableOpacity>
 
-                </TouchableOpacity>
-
-                <View style={styles.songOptions}>
-                    <Text style={{ fontSize: 20 }}>❤️</Text>
-                    <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'white', marginTop: -4 }}>⋮</Text>
-                </View>
+            <View style={styles.songOptions}>
+                <Text style={{ fontSize: 20 }}>❤️</Text>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'white', marginTop: -4 }}>⋮</Text>
             </View>
         </View>
     )
@@ -36,14 +32,6 @@ const SingleSong = () => {
 export default SingleSong
 
 const styles = StyleSheet.create({
-    mainContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        gap: 10,
-        paddingRight: 10,
-    },
     songTrack: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -51,7 +39,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#121213',
         paddingRight: 20,
         borderRadius: 20,
-        overflow: 'hidden',
+        borderWidth: 0.5,
+        borderColor: '#D7007D',
+        overflow: 'hidden'
     },
     tinyLogo: {
         width: 50,
@@ -68,10 +58,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 10
     },
-    dot: {
-        width: 10,
-        height: 10,
-        borderRadius: '50%',
-        backgroundColor: 'white',
-    }
 })

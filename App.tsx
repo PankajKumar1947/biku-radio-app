@@ -26,7 +26,8 @@ const RootStack = createNativeStackNavigator({
     player: {
       screen: PlayerScreen,
       options: {
-        title: 'Back to Radio Playstation',
+        title: 'Playing Now',
+        headerTitleAlign: 'center',
       },
     }
   },

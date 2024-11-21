@@ -3,6 +3,7 @@ import {
     ScrollView,
     StatusBar,
     StyleSheet,
+    Text,
     useColorScheme,
     View,
 } from 'react-native';
@@ -10,9 +11,8 @@ import {
 import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import Navbar from '../components/Navbar';
-import SongList from '../components/SongList';
-
+import GenreCard from '../components/GenreCard';
+import { GenreList } from '../utils/genre';
 
 const HomeScreen = () => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -30,16 +30,40 @@ const HomeScreen = () => {
                 contentInsetAdjustmentBehavior="automatic"
                 style={backgroundStyle}>
 
-
-                <View style={{ flex: 1, position: 'relative' }}>
-                    <Navbar />
-                    <SongList />
+                <View>
+                    <Text style={styles.genreChoose}>Choose a genre you like</Text>
                 </View>
 
+                <View style={styles.container}>
+                    {
+                        GenreList.map((genre, index) => {
+                            return <GenreCard key={index} genre={genre} />;
+                        })
+                    }
+                </View>
 
             </ScrollView>
         </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'black',
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 10,
+        padding: 10,
+    },
+    genreChoose: {
+        paddingHorizontal: 10,
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: '#D7007D',
+    }
+})
 
 export default HomeScreen

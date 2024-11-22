@@ -6,8 +6,7 @@ import FeatherIcons from 'react-native-vector-icons/Feather'
 import AntIcons from 'react-native-vector-icons/AntDesign'
 
 const PlayerScreen = ({ route }: any) => {
-    const { } = route.params;//extracking params
-    console.log(route.params);
+    const { stationId, stationName, stationUrl } = route.params;
     return (
         <View style={styles.container}>
             <Image
@@ -15,12 +14,12 @@ const PlayerScreen = ({ route }: any) => {
                 source={require('../assets/songicon.jpg')} />
 
             <View>
-                <Text style={styles.stationName}>Song name</Text>
+                <Text style={styles.stationName}>{stationName}</Text>
             </View>
             <LottieView style={styles.lottieStyle} source={require('../assets/animation/musicwave.json')} autoPlay loop />
             <View style={styles.playerBtn}>
                 <AntIcons name="sound" size={40} color="#D7007D" />
-                <Icons name="backward" size={40} color="#D7007D"/>
+                <Icons name="backward" size={40} color="#D7007D" />
                 <Icons name="pause" size={40} color="#D7007D" />
                 <Icons name="forward" size={40} color="#D7007D" />
                 <FeatherIcons name="headphones" size={40} color="#D7007D" />
@@ -34,34 +33,37 @@ export default PlayerScreen
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
         backgroundColor: 'black',
-        width:'100%',
-        flex:1,
-        alignItems:"center"
+        width: '100%',
+        flex: 1,
+        alignItems: "center",
+        position: 'relative'
     },
     playingImg: {
-        height: '48%',
-        width:'80%',
-        borderRadius:40,
-        marginTop: 30
+        height: '45%',
+        width: '80%',
+        borderRadius: 40,
+        marginTop: 20
     },
     stationName: {
         color: 'white',
         fontSize: 30,
         fontWeight: 'bold',
         letterSpacing: 1,
-        marginTop: 5
+        marginTop: 5,
+        paddingHorizontal: 20
     },
     lottieStyle: {
         height: 200,
-        width: '100%',          
+        width: '100%',
     },
     playerBtn: {
         width: '100%',
-        justifyContent:'space-around',
-        flex:1,
+        justifyContent: 'space-around',
+        flex: 1,
         flexDirection: 'row',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        alignItems: 'flex-end',
+        marginBottom: 20,   
     }
 })

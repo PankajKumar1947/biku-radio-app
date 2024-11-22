@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const SingleSong = () => {
+const SingleSong = ({station}:any) => {
     const navigation = useNavigation();
     return (
         <View style={styles.songTrack}>
@@ -10,15 +10,16 @@ const SingleSong = () => {
                 onPress={() => {
                     //@ts-ignore
                     navigation.navigate('player', {
-                        itemId: 86,
-                        otherParam: 'anything you want here',
+                        stationId: station?.stationuuid,
+                        stationName: station?.name,
+                        stationUrl: station?.url,
                     })
                 }}
                 style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
                 <Image
                     style={styles.tinyLogo}
                     source={require('../assets/songicon.jpg')} />
-                <Text style={styles.songTitle}>Song Name</Text>
+                <Text style={styles.songTitle}>{station?.name}</Text>
             </TouchableOpacity>
 
             <View style={styles.songOptions}>

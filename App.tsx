@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import PlayerScreen from './src/screens/PlayerScreen';
 import SongListScreen from './src/screens/SongListScreen';
+import { Provider } from 'react-redux';
+import { store } from './src/reducers';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -15,7 +17,7 @@ const RootStack = createNativeStackNavigator({
     headerTitleStyle: {
       fontWeight: 'bold',
       fontSize: 20
-    }, 
+    },
   },
   screens: {
     Home: {
@@ -31,7 +33,7 @@ const RootStack = createNativeStackNavigator({
         }
       }
     },
-    songlist:{
+    songlist: {
       screen: SongListScreen,
       options: ({ route }) => ({
         //@ts-ignore
@@ -52,5 +54,9 @@ const RootStack = createNativeStackNavigator({
 const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
-  return <Navigation />;
+  return (
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
+  );
 }

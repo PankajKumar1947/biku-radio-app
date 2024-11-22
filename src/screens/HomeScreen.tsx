@@ -13,9 +13,31 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import GenreCard from '../components/GenreCard';
 import { GenreList } from '../utils/genre';
+import { useEffect } from 'react';
+import { fetchPlayStation } from '../services/fetchPlayStation';
+import { useDispatch } from 'react-redux';
+import { addPlaystationData, setLoading } from '../slices/playstationDataSlice';
 
 const HomeScreen = () => {
     const isDarkMode = useColorScheme() === 'dark';
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            dispatch(setLoading(true));
+            try {
+                const result = await fetchPlayStation();
+                dispatch(addPlaystationData(result));
+                dispatch(setLoading(false));
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+                dispatch(setLoading(false));
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.black : Colors.lighter,

@@ -1,5 +1,9 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Icons from 'react-native-vector-icons/FontAwesome'
+import LottieView from 'lottie-react-native'
+import FeatherIcons from 'react-native-vector-icons/Feather'
+import AntIcons from 'react-native-vector-icons/AntDesign'
 
 const PlayerScreen = ({ route }: any) => {
     const { } = route.params;//extracking params
@@ -13,9 +17,13 @@ const PlayerScreen = ({ route }: any) => {
             <View>
                 <Text style={styles.stationName}>Song name</Text>
             </View>
-
-            <View>
-                
+            <LottieView style={styles.lottieStyle} source={require('../assets/animation/musicwave.json')} autoPlay loop />
+            <View style={styles.playerBtn}>
+                <AntIcons name="sound" size={40} color="#D7007D" />
+                <Icons name="backward" size={40} color="#D7007D"/>
+                <Icons name="pause" size={40} color="#D7007D" />
+                <Icons name="forward" size={40} color="#D7007D" />
+                <FeatherIcons name="headphones" size={40} color="#D7007D" />
             </View>
 
         </View>
@@ -33,10 +41,10 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     playingImg: {
-        height: '50%',
+        height: '48%',
         width:'80%',
         borderRadius:40,
-        marginTop: 40
+        marginTop: 30
     },
     stationName: {
         color: 'white',
@@ -44,5 +52,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 1,
         marginTop: 5
+    },
+    lottieStyle: {
+        height: 200,
+        width: '100%',          
+    },
+    playerBtn: {
+        width: '100%',
+        justifyContent:'space-around',
+        flex:1,
+        flexDirection: 'row',
+        paddingHorizontal: 20
     }
 })

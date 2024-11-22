@@ -1,15 +1,40 @@
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
 const GenreCard = ({ genre }: any) => {
     const navigation = useNavigation();
+    const [data , setData] = useState([]);
+
+    useEffect(() => {
+        const fetchPlayStation = async () =>{
+            try{
+                const response = await fetch("https://de1.api.radio-browser.info/json/stations/bycountry/india");
+                const data = await response.json();
+                setData(data);
+
+                
+                //save teh fetched result to global state
+
+
+
+
+                return data
+            }catch(error){
+                console.log("Error occured in fetchPlayStation", error);
+            }
+        }
+        if(data.length === 0){
+            fetchPlayStation();
+        }
+    },[])
+
     return (
         <TouchableOpacity
             //@ts-ignore
             onPress={() => { navigation.navigate('songlist', {
                 genre: genre.name,
-                search: genre.search
+                search: genre.search,
             }) }}
             style={styles.container}>
             <ImageBackground source={genre?.image} resizeMode="stretch" style={styles.image}>

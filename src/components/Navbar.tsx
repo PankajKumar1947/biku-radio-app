@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 
-const Navbar = () => {
+const Navbar = ({searchInput, setSearchInput}:any) => {
     return (
         <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>🇮🇳</Text>
-            <TextInput placeholder='Search' style={styles.inputBox} />
+            <TextInput 
+                value={searchInput} onChangeText={setSearchInput} 
+                placeholder='Search' style={styles.inputBox} />
             <Text style={styles.hamberger}>🍔</Text>
         </View>
     )
@@ -22,8 +24,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        borderWidth: 1,
-        
+        borderWidth: 1,   
     },
     sectionTitle: {
         fontSize: 24,
@@ -35,7 +36,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: 'white',
         width: '70%',
-        borderWidth: 0.2
+        borderWidth: 0.2,
+        color: 'white'
     },
     hamberger: {
         fontSize: 24,

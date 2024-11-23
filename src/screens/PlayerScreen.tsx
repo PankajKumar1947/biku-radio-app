@@ -1,12 +1,28 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Icons from 'react-native-vector-icons/FontAwesome'
 import LottieView from 'lottie-react-native'
 import FeatherIcons from 'react-native-vector-icons/Feather'
 import AntIcons from 'react-native-vector-icons/AntDesign'
+import TrackPlayer from 'react-native-track-player'
 
 const PlayerScreen = ({ route }: any) => {
     const { stationId, stationName, stationUrl } = route.params;
+
+    useEffect(() => {
+        const start = async () => {
+            await TrackPlayer.reset();
+
+            await TrackPlayer.add({
+                id: 'trackId',
+                url: stationUrl,
+            });
+
+            await TrackPlayer.play();
+            
+        };
+        start();
+    },[])
     return (
         <View style={styles.container}>
             <Image

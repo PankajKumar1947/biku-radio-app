@@ -6,6 +6,7 @@ import PlayerScreen from './src/screens/PlayerScreen';
 import SongListScreen from './src/screens/SongListScreen';
 import { Provider } from 'react-redux';
 import { store } from './src/reducers';
+import TrackPlayer from 'react-native-track-player';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -54,6 +55,9 @@ const RootStack = createNativeStackNavigator({
 const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
+  React.useEffect(() => {
+    TrackPlayer.setupPlayer();
+  })
   return (
     <Provider store={store}>
       <Navigation />

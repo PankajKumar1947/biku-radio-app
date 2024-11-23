@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const SingleSong = ({station}:any) => {
+const SingleSong = ({ station }: any) => {
     const navigation = useNavigation();
     return (
         <View style={styles.songTrack}>
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#121213',
         paddingRight: 20,
+        marginHorizontal: 10,
         borderRadius: 20,
         borderWidth: 0.5,
         borderColor: '#D7007D',

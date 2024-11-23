@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
     },
     genreChoose: {
         paddingHorizontal: 10,
-        fontSize: 28,
+        fontSize: 25,
         fontWeight: 'bold',
-        color: '#D7007D',
+        color: 'white',
     }
 })
 

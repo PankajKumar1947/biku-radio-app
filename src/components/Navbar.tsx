@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     sectionContainer: {
         backgroundColor: 'black',
         paddingHorizontal: 15,
-        paddingVertical: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

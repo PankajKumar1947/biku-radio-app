@@ -21,11 +21,7 @@ const SingleSong = ({ station }: any) => {
                     source={require('../assets/songicon.jpg')} />
                 <Text style={styles.songTitle}>{station?.name}</Text>
             </TouchableOpacity>
-
-            <View style={styles.songOptions}>
-                <Text style={{ fontSize: 20 }}>❤️</Text>
-                <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'white', marginTop: -4 }}>⋮</Text>
-            </View>
+            <Text style={styles.options}>⋮</Text>
         </View>
     )
 }
@@ -54,10 +50,12 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'left',
     },
-    songOptions: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: 10
-    },
+    options: { 
+        fontSize: 25, 
+        fontWeight: 'bold', 
+        color: 'white', 
+        marginTop: -4 , 
+        width: 20,
+        textAlign: 'right'
+    }
 })

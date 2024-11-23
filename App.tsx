@@ -27,7 +27,6 @@ const RootStack = createNativeStackNavigator({
         title: 'BIKU Radio',
         headerTitleAlign: 'center',
         headerTitleStyle: {
-          color: 'white',
           fontWeight: 'bold',
           fontSize: 30,
           letterSpacing: 1,

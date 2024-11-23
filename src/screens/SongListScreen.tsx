@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
         flex: 1,
         minHeight: 680,
         backgroundColor: 'black',
-        paddingVertical: 8
+        paddingTop: 8
     },
 })

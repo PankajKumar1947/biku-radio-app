@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import playStationDataReducer from '../slices/playstationDataSlice';
+import playingSongReducer from '../slices/playingSongSlice';
 
 export const store = configureStore({
     reducer: {
-        playstationData: playStationDataReducer
+        playstationData: playStationDataReducer,
+        playingSong: playingSongReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

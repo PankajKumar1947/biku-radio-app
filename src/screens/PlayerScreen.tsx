@@ -5,41 +5,23 @@ import LottieView from 'lottie-react-native';
 import AntIcons from 'react-native-vector-icons/AntDesign';
 import OctIcons from 'react-native-vector-icons/Octicons';
 import TrackPlayer, { Event, State } from 'react-native-track-player';
+import { useDispatch, useSelector } from 'react-redux';
+import { muteSound, startPlayer, stopPlayer } from '../services/audioControls';
 
 const PlayerScreen = ({ route }: any) => {
-    const { stationId, stationName, stationUrl } = route.params;
-    const [isLoading, setIsLoading] = useState(true);
-    const [mutedSound, setMutedSound] = useState(false);
+    const playingSong = useSelector((state: any) => state.playingSong);
+    const dispatch = useDispatch();
     const [favorited, setFavorited] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-
-    const muteSound = async () => {
-        if (mutedSound) {
-            await TrackPlayer.setVolume(1);
-            setMutedSound(false);
-        } else {
-            await TrackPlayer.setVolume(0);
-            setMutedSound(true);
-        }
-    }
+    const [isLoading, setIsLoading] = useState(true);
+    const mutedSound= playingSong?.mutedAudio; 
+    const stationId = playingSong?.playingSongId;
+    const stationName = playingSong?.playingSongName;
+    const stationUrl = playingSong?.playingSongUrl;
+    const isPlaying = playingSong?.isPlayingSong;
 
     const toggleFavorite = () => {
         setFavorited(!favorited);
     }
-
-    const start = async () => {
-        await TrackPlayer.reset();
-        await TrackPlayer.add({
-            id: 'trackId',
-            url: stationUrl,
-        });
-        await TrackPlayer.play();
-        setIsPlaying(true);
-    };
-    const stopPlayer = async () => {
-        await TrackPlayer.pause();
-        setIsPlaying(false);
-    };
 
     useEffect(() => {
         const handlePlaybackState = async (state: State) => {
@@ -48,7 +30,7 @@ const PlayerScreen = ({ route }: any) => {
             }
         };
 
-        start();
+        startPlayer({ stationUrl, dispatch });
         // Add event listener for playback state
         const playbackListener = TrackPlayer.addEventListener(Event.PlaybackState, (data) => {
             handlePlaybackState(data.state);
@@ -80,11 +62,11 @@ const PlayerScreen = ({ route }: any) => {
                         </View>
                         <LottieView style={styles.lottieStyle} source={require('../assets/animation/musicwave.json')} autoPlay loop />
                         <View style={styles.playerBtn}>
-                            <TouchableOpacity onPress={muteSound}>
+                            <TouchableOpacity onPress={()=>muteSound({mutedSound, dispatch})}>
                                 <OctIcons name={mutedSound ? 'mute' : 'unmute'} size={40} color="#D7007D" />
                             </TouchableOpacity>
                             <Icons name="backward" size={40} color="#D7007D" />
-                            <TouchableOpacity onPress={isPlaying ? stopPlayer : start}>
+                            <TouchableOpacity onPress={isPlaying ? ()=> stopPlayer({dispatch}) : ()=>startPlayer({stationUrl, dispatch})}>
                                 <Icons name={isPlaying ? 'pause' : 'play'} size={40} color="#D7007D" />
                             </TouchableOpacity>
 

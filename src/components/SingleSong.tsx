@@ -1,20 +1,26 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlayingSongId, setPlayingSongName, setPlayingSongUrl } from '../slices/playingSongSlice';
 
 const SingleSong = ({ station }: any) => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const playingSong = useSelector((state: any) => state.playingSong);
+
+    const setPlayingSong = () => {
+        dispatch(setPlayingSongUrl(station?.url));
+        dispatch(setPlayingSongId(station?.stationuuid));
+        dispatch(setPlayingSongName(station?.name));
+
+        // @ts-ignore
+        navigation.navigate('player')
+    }
     return (
-        <View style={styles.songTrack}>
+        <View style={playingSong?.playingSongId === station?.stationuuid ? [styles.songTrack, styles.playingSongTrack] : styles.songTrack }>
             <TouchableOpacity
-                onPress={() => {
-                    //@ts-ignore
-                    navigation.navigate('player', {
-                        stationId: station?.stationuuid,
-                        stationName: station?.name,
-                        stationUrl: station?.url,
-                    })
-                }}
+                onPress={setPlayingSong}
                 style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
                 <Image
                     style={styles.tinyLogo}
@@ -41,6 +47,9 @@ const styles = StyleSheet.create({
         borderColor: '#D7007D',
         overflow: 'hidden'
     },
+    playingSongTrack: {  
+        backgroundColor: '#290617',
+    },
     tinyLogo: {
         width: 50,
         height: 50,
@@ -50,11 +59,11 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'left',
     },
-    options: { 
-        fontSize: 25, 
-        fontWeight: 'bold', 
-        color: 'white', 
-        marginTop: -4 , 
+    options: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: 'white',
+        marginTop: -4,
         width: 20,
         textAlign: 'right'
     }

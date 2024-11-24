@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import SingleSong from '../components/SingleSong';
 import { useSelector } from 'react-redux';
 import Loader from '../components/Loader';
+import PlayingBar from '../components/PlayingBar';
 
 const SongListScreen = ({ route }: any) => {
     const { genre, search } = route.params;//extracking params
@@ -12,26 +13,29 @@ const SongListScreen = ({ route }: any) => {
     const loading = playStation.loading;
     const [searchInput, setSearchInput] = useState('');
 
-    const filteredData = genre === "All" ? 
-    playStationData.filter((item: any) => item?.name.toLowerCase().includes(searchInput.toLowerCase())) 
-    : 
-    playStationData.filter((item: any) => item?.name.toLowerCase().includes(search.toLowerCase()));
+    const filteredData = genre === "All" ?
+        playStationData.filter((item: any) => item?.name.toLowerCase().includes(searchInput.toLowerCase()))
+        :
+        playStationData.filter((item: any) => item?.name.toLowerCase().includes(search.toLowerCase()));
 
     return (
-        <View style={{ flex: 1, position: 'relative' }}>
-            {
-                genre === "All" && <Navbar searchInput={searchInput} setSearchInput={setSearchInput} />
-            }
-            {
-                loading ? <Loader /> : <View style={styles.container}>
-                    <FlatList
-                        data={filteredData}
-                        renderItem={({ item }) => <SingleSong station={item}/>}
-                        keyExtractor={item => item?.stationuuid}
-                    />
-                </View>
-            }
-        </View>
+        <>
+            <View style={{ flex: 1, position: 'relative' }}>
+                {
+                    genre === "All" && <Navbar searchInput={searchInput} setSearchInput={setSearchInput} />
+                }
+                {
+                    loading ? <Loader /> : <View style={styles.container}>
+                        <FlatList
+                            data={filteredData}
+                            renderItem={({ item }) => <SingleSong station={item} />}
+                            keyExtractor={item => item?.stationuuid}
+                        />
+                    </View>
+                }
+            </View>
+            <PlayingBar />
+        </>
     )
 }
 

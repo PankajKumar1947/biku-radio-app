@@ -1,14 +1,31 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { singersList } from '../utils/singers'
+import { useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+import { setPlayingSongId, setPlayingSongName, setPlayingSongUrl } from '../slices/playingSongSlice'
 
 const Singer = () => {
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
+    const playSingerSongHandler = (singer:any) => {
+        
+
+        dispatch(setPlayingSongUrl(singer?.url));
+        dispatch(setPlayingSongId(singer?.stationuuid));
+        dispatch(setPlayingSongName(singer?.stationName));
+
+        // @ts-ignore
+        navigation.navigate('player')
+    }
     return (
         <View style={styles.mainContainer}>
             {
                 singersList.map((singer) => {
                     return (
-                        <TouchableOpacity key={singer.id}>
+                        <TouchableOpacity
+                        onPress={() => playSingerSongHandler(singer)}
+                        key={singer.id}>
                             <ImageBackground
                                 source={singer.image}
                                 style={styles.singerContainer}>   

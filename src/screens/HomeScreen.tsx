@@ -55,7 +55,7 @@ const HomeScreen = () => {
                 style={[backgroundStyle, { paddingHorizontal: 10 }]}>
 
                 <View>
-                    <Text style={styles.genreChoose}>Choose a genre you like</Text>
+                    <Text style={styles.genreChoose}>Choose a Genre you Like</Text>
                 </View>
 
                 <View style={styles.container}>
@@ -69,7 +69,7 @@ const HomeScreen = () => {
 
                 {/* singers  */}
                 <View style={{ marginTop: 20 }}>
-                    <Text style={styles.genreChoose}>Browse by singers</Text>
+                    <Text style={styles.genreChoose}>Browse by Singers</Text>
                     <Singer />
                 </View>
 

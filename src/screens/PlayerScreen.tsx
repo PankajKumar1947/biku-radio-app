@@ -4,7 +4,7 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import LottieView from 'lottie-react-native';
 import AntIcons from 'react-native-vector-icons/AntDesign';
 import OctIcons from 'react-native-vector-icons/Octicons';
-import TrackPlayer, { Event, State } from 'react-native-track-player';
+import TrackPlayer, { Event, State, Capability } from 'react-native-track-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { muteSound, startPlayer, stopPlayer } from '../services/audioControls';
 
@@ -22,6 +22,25 @@ const PlayerScreen = ({ route }: any) => {
     const toggleFavorite = () => {
         setFavorited(!favorited);
     }
+
+    TrackPlayer.updateOptions({
+        // Media controls capabilities
+        capabilities: [
+            Capability.Play,
+        ],
+    
+        // Capabilities that will show up when the notification is in the compact form on Android
+        compactCapabilities: [Capability.Play],
+        stoppingAppPausesPlayback: true,
+        
+    });
+
+    TrackPlayer.updateNowPlayingMetadata({
+        title: stationName,
+        artist: 'Biku Radio',
+        album: 'Biku Radio',
+        artwork: require('../assets/songicon.jpg'),   
+    })
 
     useEffect(() => {
         const handlePlaybackState = async (state: State) => {

@@ -4,7 +4,7 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import LottieView from 'lottie-react-native';
 import AntIcons from 'react-native-vector-icons/AntDesign';
 import OctIcons from 'react-native-vector-icons/Octicons';
-import TrackPlayer, { Event, State, Capability } from 'react-native-track-player';
+import TrackPlayer, { Event, State, Capability, AppKilledPlaybackBehavior } from 'react-native-track-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { muteSound, startPlayer, stopPlayer } from '../services/audioControls';
 
@@ -13,7 +13,7 @@ const PlayerScreen = ({ route }: any) => {
     const dispatch = useDispatch();
     const [favorited, setFavorited] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const mutedSound= playingSong?.mutedAudio; 
+    const mutedSound = playingSong?.mutedAudio;
     const stationId = playingSong?.playingSongId;
     const stationName = playingSong?.playingSongName;
     const stationUrl = playingSong?.playingSongUrl;
@@ -28,18 +28,22 @@ const PlayerScreen = ({ route }: any) => {
         capabilities: [
             Capability.Play,
         ],
-    
+
         // Capabilities that will show up when the notification is in the compact form on Android
         compactCapabilities: [Capability.Play],
-        stoppingAppPausesPlayback: true,
-        
+
+        // App killed playback behavior
+        android: {
+            appKilledPlaybackBehavior:
+                AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+        },
     });
 
     TrackPlayer.updateNowPlayingMetadata({
         title: stationName,
         artist: 'Biku Radio',
         album: 'Biku Radio',
-        artwork: require('../assets/songicon.jpg'),   
+        artwork: require('../assets/songicon.jpg'),
     })
 
     useEffect(() => {
@@ -81,11 +85,11 @@ const PlayerScreen = ({ route }: any) => {
                         </View>
                         <LottieView style={styles.lottieStyle} source={require('../assets/animation/musicwave.json')} autoPlay loop />
                         <View style={styles.playerBtn}>
-                            <TouchableOpacity onPress={()=>muteSound({mutedSound, dispatch})}>
+                            <TouchableOpacity onPress={() => muteSound({ mutedSound, dispatch })}>
                                 <OctIcons name={mutedSound ? 'mute' : 'unmute'} size={40} color="#D7007D" />
                             </TouchableOpacity>
                             <Icons name="backward" size={40} color="#D7007D" />
-                            <TouchableOpacity onPress={isPlaying ? ()=> stopPlayer({dispatch}) : ()=>startPlayer({stationUrl, dispatch})}>
+                            <TouchableOpacity onPress={isPlaying ? () => stopPlayer({ dispatch }) : () => startPlayer({ stationUrl, dispatch })}>
                                 <Icons name={isPlaying ? 'pause' : 'play'} size={40} color="#D7007D" />
                             </TouchableOpacity>
 

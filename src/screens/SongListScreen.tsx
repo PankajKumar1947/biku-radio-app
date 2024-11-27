@@ -14,9 +14,9 @@ const SongListScreen = ({ route }: any) => {
     const [searchInput, setSearchInput] = useState('');
 
     const filteredData = genre === "All" ?
-        playStationData.filter((item: any) => item?.name.toLowerCase().includes(searchInput.toLowerCase()))
+        playStationData?.filter((item: any) => item?.name.toLowerCase().includes(searchInput.toLowerCase()))
         :
-        playStationData.filter((item: any) => item?.name.toLowerCase().includes(search.toLowerCase()));
+        playStationData?.filter((item: any) => item?.name.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <>
@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
         flex: 1,
         minHeight: 680,
         backgroundColor: 'black',
-        paddingTop: 8
+        paddingBottom:20
     },
 })

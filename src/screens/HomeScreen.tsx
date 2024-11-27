@@ -42,12 +42,12 @@ const HomeScreen = () => {
     }, []);
 
     const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.black : Colors.lighter,
+        backgroundColor: isDarkMode ? Colors.black : Colors.black,
     };
     return (
-        <SafeAreaView style={[backgroundStyle, styles.backGroundStyle]}>
+        <SafeAreaView style={[styles.backGroundStyle]}>
             <StatusBar
-                barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+                barStyle={isDarkMode ? 'light-content' : 'light-content'}
                 backgroundColor={backgroundStyle.backgroundColor}
             />
             <ScrollView
@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
     genreChoose: {
-        paddingHorizontal: 10,
         fontSize: 25,
         fontWeight: 'bold',
         color: 'white',

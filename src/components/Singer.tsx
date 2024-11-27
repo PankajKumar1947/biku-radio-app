@@ -9,7 +9,6 @@ const Singer = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const playSingerSongHandler = (singer:any) => {
-        
 
         dispatch(setPlayingSongUrl(singer?.url));
         dispatch(setPlayingSongId(singer?.stationuuid));
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     },
     singerName: {
         color: 'white',
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: 'bold',
         textAlign: 'center',
         opacity: 0.8

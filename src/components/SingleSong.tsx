@@ -3,6 +3,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayingSongId, setPlayingSongName, setPlayingSongUrl } from '../slices/playingSongSlice';
+import Snackbar from 'react-native-snackbar';
 
 const SingleSong = ({ station }: any) => {
     const navigation = useNavigation();
@@ -10,7 +11,23 @@ const SingleSong = ({ station }: any) => {
     const playingSong = useSelector((state: any) => state.playingSong);
 
     const setPlayingSong = () => {
-        dispatch(setPlayingSongUrl(station?.url));
+        if (station?.url_resolved?.includes('m3u8')) {
+            Snackbar.show({
+                text: 'This station is not supported',
+                duration: Snackbar.LENGTH_SHORT,
+                action: {
+                    text: 'OK',
+                    textColor: 'green',
+                    onPress: () => { 
+                        //remove the snackbar
+                        Snackbar.dismiss();
+                    },
+                },
+
+            })
+            return ;
+        }
+        dispatch(setPlayingSongUrl(station?.url_resolved));
         dispatch(setPlayingSongId(station?.stationuuid));
         dispatch(setPlayingSongName(station?.name));
 
@@ -18,7 +35,7 @@ const SingleSong = ({ station }: any) => {
         navigation.navigate('player')
     }
     return (
-        <View style={playingSong?.playingSongId === station?.stationuuid ? [styles.songTrack, styles.playingSongTrack] : styles.songTrack }>
+        <View style={playingSong?.playingSongId === station?.stationuuid ? [styles.songTrack, styles.playingSongTrack] : styles.songTrack}>
             <TouchableOpacity
                 onPress={setPlayingSong}
                 style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
@@ -47,7 +64,7 @@ const styles = StyleSheet.create({
         borderColor: '#D7007D',
         overflow: 'hidden'
     },
-    playingSongTrack: {  
+    playingSongTrack: {
         backgroundColor: '#290617',
     },
     tinyLogo: {

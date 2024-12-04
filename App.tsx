@@ -1,65 +1,11 @@
 import * as React from 'react';
 import { createStaticNavigation } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/screens/HomeScreen';
-import PlayerScreen from './src/screens/PlayerScreen';
-import SongListScreen from './src/screens/SongListScreen';
 import { Provider } from 'react-redux';
 import { store } from './src/reducers';
 import TrackPlayer from 'react-native-track-player';
-import FavouriteScreen from './src/screens/FavouriteScreen';
 import persistStore from 'redux-persist/es/persistStore';
 import { PersistGate } from 'redux-persist/integration/react'
-
-const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Home',
-  screenOptions: {
-    headerStyle: {
-      backgroundColor: 'black',
-    },
-    headerTintColor: '#D7007D',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-      fontSize: 20
-    },
-  },
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      options: {
-        title: 'BIKU Radio',
-        headerTitleAlign: 'center',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 30,
-          letterSpacing: 1,
-        }
-      }
-    },
-    songlist: {
-      screen: SongListScreen,
-      options: ({ route }) => ({
-        //@ts-ignore
-        title: `${route?.params?.genre} PlayStation`,
-      }),
-    },
-    player: {
-      screen: PlayerScreen,
-      options: {
-        title: 'Playing Now',
-        headerTitleAlign: 'center',
-      },
-    },
-    favourite: {
-      screen: FavouriteScreen,
-      options: {
-        title: 'Favourites',
-        headerTitleAlign: 'center',
-      }
-    }
-  },
-
-});
+import { RootStack } from './src/navigation/route';
 
 const Navigation = createStaticNavigation(RootStack);
 

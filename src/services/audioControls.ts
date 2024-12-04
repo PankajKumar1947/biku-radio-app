@@ -31,6 +31,6 @@ export const startPlayer = async ({ stationUrl, dispatch, setIsLoading }: any) =
 };
 
 export const stopPlayer = async ({dispatch}:any) => {
-    await TrackPlayer.pause();
     dispatch(setIsPlayingSong(false));
+    await TrackPlayer.pause(); 
 };

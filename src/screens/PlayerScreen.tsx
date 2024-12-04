@@ -54,7 +54,7 @@ const PlayerScreen = ({ route }: any) => {
             }
         };
 
-        startPlayer({ stationUrl, dispatch , setIsLoading});
+        startPlayer({ stationUrl, dispatch, setIsLoading });
         // Add event listener for playback state
         const playbackListener = TrackPlayer.addEventListener(Event.PlaybackState, (data) => {
             handlePlaybackState(data.state);
@@ -76,7 +76,7 @@ const PlayerScreen = ({ route }: any) => {
 
         dispatch(addFavouriteSong(payLoad));
         setFavorited(!favorited);
-        
+
     }
     return (
         <View style={styles.container}>
@@ -96,7 +96,12 @@ const PlayerScreen = ({ route }: any) => {
                         <View>
                             <Text style={styles.stationName}>{stationName}</Text>
                         </View>
-                        <LottieView style={styles.lottieStyle} source={require('../assets/animation/musicwave.json')} autoPlay loop />
+                        <LottieView
+                            style={styles.lottieStyle}
+                            source={require('../assets/animation/musicwave.json')}
+                            autoPlay
+                            speed={isPlaying ? 1 : 0}
+                            loop />
                         <View style={styles.playerBtn}>
                             <TouchableOpacity onPress={() => muteSound({ mutedSound, dispatch })}>
                                 <OctIcons name={mutedSound ? 'mute' : 'unmute'} size={40} color="#D7007D" />

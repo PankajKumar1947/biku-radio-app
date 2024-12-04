@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { store } from './src/reducers';
 import TrackPlayer from 'react-native-track-player';
 import FavouriteScreen from './src/screens/FavouriteScreen';
+import persistStore from 'redux-persist/es/persistStore';
+import { PersistGate } from 'redux-persist/integration/react'
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -61,13 +63,17 @@ const RootStack = createNativeStackNavigator({
 
 const Navigation = createStaticNavigation(RootStack);
 
+let persistor = persistStore(store);
+
 export default function App() {
   React.useEffect(() => {
     TrackPlayer.setupPlayer();
   })
   return (
     <Provider store={store}>
-      <Navigation />
+      <PersistGate persistor={persistor}>
+        <Navigation />
+      </PersistGate>
     </Provider>
   );
 }

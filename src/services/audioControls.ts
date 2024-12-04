@@ -11,7 +11,16 @@ export const muteSound = async ({ mutedSound, dispatch }: any) => {
     }
 }
 
-export const startPlayer = async ({ stationUrl, dispatch }: any) => {
+export const startPlayer = async ({ stationUrl, dispatch, setIsLoading }: any) => {
+    //if the player is already playing same song then start the player only
+    const currentTrack = await TrackPlayer.getActiveTrack();
+    if(currentTrack?.url === stationUrl) {
+        dispatch(setIsPlayingSong(true));
+        await TrackPlayer.play();
+        setIsLoading(false)
+        return
+    }
+
     await TrackPlayer.reset();
     await TrackPlayer.add({
         id: 'trackId',

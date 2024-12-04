@@ -8,7 +8,6 @@ import TrackPlayer, { Event, State, Capability, AppKilledPlaybackBehavior } from
 import { useDispatch, useSelector } from 'react-redux';
 import { muteSound, startPlayer, stopPlayer } from '../services/audioControls';
 import { addFavouriteSong, FavouriteSongState } from '../slices/favouriteSongSlice';
-import Snackbar from 'react-native-snackbar';
 import { useNavigation } from '@react-navigation/native';
 
 const PlayerScreen = ({ route }: any) => {
@@ -55,7 +54,7 @@ const PlayerScreen = ({ route }: any) => {
             }
         };
 
-        startPlayer({ stationUrl, dispatch });
+        startPlayer({ stationUrl, dispatch , setIsLoading});
         // Add event listener for playback state
         const playbackListener = TrackPlayer.addEventListener(Event.PlaybackState, (data) => {
             handlePlaybackState(data.state);

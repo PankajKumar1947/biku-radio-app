@@ -3,6 +3,7 @@ import HomeScreen from "../screens/HomeScreen";
 import SongListScreen from "../screens/SongListScreen";
 import PlayerScreen from "../screens/PlayerScreen";
 import FavouriteScreen from "../screens/FavouriteScreen";
+import TrendingScreen from "../screens/TrendingScreen";
 
 export const RootStack = createNativeStackNavigator({
     initialRouteName: 'Home',
@@ -46,9 +47,16 @@ export const RootStack = createNativeStackNavigator({
         favourite: {
             screen: FavouriteScreen,
             options: {
-                title: 'Favourites',
+                title: 'Favourites Playstation',
                 headerTitleAlign: 'center',
             }
+        },
+        trending: {
+            screen: TrendingScreen,
+            options: ({ route }:any) => ({
+                title: `${route?.params?.topic} Playstations`,
+                headerTitleAlign: 'center',
+            })
         }
     },
 

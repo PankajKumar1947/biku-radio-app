@@ -8,7 +8,9 @@ const TopicCard = ({item}:any) => {
     return (
         <TouchableOpacity
         //@ts-ignore
-        onPress={() => navigation.navigate(item?.route)}
+        onPress={() => navigation.navigate(item?.route,{
+            topic:item?.name
+        })}
         style={[styles.topicContainer, {backgroundColor:item?.bgColor}]}>
             <Ionicans name={item?.icon} size={32} color={item.iconColor} />
             <Text style={styles.text}>{item?.name}</Text>

@@ -13,7 +13,7 @@ const SingleSong = ({ station }: any) => {
     const setPlayingSong = () => {
         if (station?.url_resolved?.includes('m3u8')) {
             Snackbar.show({
-                text: 'This station is not supported',
+                text: 'Currently Unavailable',
                 duration: Snackbar.LENGTH_SHORT,
                 action: {
                     text: 'OK',

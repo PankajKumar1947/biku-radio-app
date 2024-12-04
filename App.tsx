@@ -7,6 +7,7 @@ import SongListScreen from './src/screens/SongListScreen';
 import { Provider } from 'react-redux';
 import { store } from './src/reducers';
 import TrackPlayer from 'react-native-track-player';
+import FavouriteScreen from './src/screens/FavouriteScreen';
 
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
@@ -46,6 +47,13 @@ const RootStack = createNativeStackNavigator({
         title: 'Playing Now',
         headerTitleAlign: 'center',
       },
+    },
+    favourite: {
+      screen: FavouriteScreen,
+      options: {
+        title: 'Favourites',
+        headerTitleAlign: 'center',
+      }
     }
   },
 

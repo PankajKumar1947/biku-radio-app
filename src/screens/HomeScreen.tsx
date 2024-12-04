@@ -19,6 +19,7 @@ import { useDispatch } from 'react-redux';
 import { addPlaystationData, setLoading } from '../slices/playstationDataSlice';
 import PlayingBar from '../components/PlayingBar';
 import Singer from '../components/Singer';
+import Topics from '../components/Topics';
 
 const HomeScreen = () => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -54,6 +55,11 @@ const HomeScreen = () => {
                 contentInsetAdjustmentBehavior="automatic"
                 style={[backgroundStyle, { paddingHorizontal: 10 }]}>
 
+                <View style={{ marginBottom:10}}>
+                    <Text style={styles.genreChoose}>Hot Picks for you</Text>
+                    <Topics />
+                </View>
+
                 <View>
                     <Text style={styles.genreChoose}>Choose a Genre you Like</Text>
                 </View>
@@ -72,7 +78,6 @@ const HomeScreen = () => {
                     <Text style={styles.genreChoose}>Browse by Singers</Text>
                     <Singer />
                 </View>
-
 
             </ScrollView>
             <View style={styles.playingBar}>

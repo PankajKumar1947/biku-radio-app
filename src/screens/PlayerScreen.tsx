@@ -7,6 +7,9 @@ import OctIcons from 'react-native-vector-icons/Octicons';
 import TrackPlayer, { Event, State, Capability, AppKilledPlaybackBehavior } from 'react-native-track-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { muteSound, startPlayer, stopPlayer } from '../services/audioControls';
+import { addFavouriteSong, FavouriteSongState } from '../slices/favouriteSongSlice';
+import Snackbar from 'react-native-snackbar';
+import { useNavigation } from '@react-navigation/native';
 
 const PlayerScreen = ({ route }: any) => {
     const playingSong = useSelector((state: any) => state.playingSong);
@@ -18,10 +21,9 @@ const PlayerScreen = ({ route }: any) => {
     const stationName = playingSong?.playingSongName;
     const stationUrl = playingSong?.playingSongUrl;
     const isPlaying = playingSong?.isPlayingSong;
+    const navigation = useNavigation();
 
-    const toggleFavorite = () => {
-        setFavorited(!favorited);
-    }
+    const favouriteSongList = useSelector((state: any) => state.favouriteSong?.favouriteSong);
 
     TrackPlayer.updateOptions({
         // Media controls capabilities
@@ -65,6 +67,18 @@ const PlayerScreen = ({ route }: any) => {
         };
     }, []);
 
+    const addFavourite = () => {
+        const payLoad = {
+            stationuuid: stationId,
+            name: stationName,
+            url_resolved: stationUrl,
+            navigation: navigation
+        }
+
+        dispatch(addFavouriteSong(payLoad));
+        setFavorited(!favorited);
+        
+    }
     return (
         <View style={styles.container}>
             {
@@ -94,8 +108,11 @@ const PlayerScreen = ({ route }: any) => {
                             </TouchableOpacity>
 
                             <Icons name="forward" size={40} color="#D7007D" />
-                            <TouchableOpacity onPress={toggleFavorite}>
-                                <AntIcons name={favorited ? 'heart' : 'hearto'} size={40} color="#D7007D" />
+                            <TouchableOpacity onPress={addFavourite}>
+                                <AntIcons name={
+                                    favouriteSongList?.some((song: FavouriteSongState) => song?.stationuuid === stationId)
+                                        ? 'heart' : 'hearto'
+                                } size={40} color="#D7007D" />
                             </TouchableOpacity>
                         </View>
                     </>

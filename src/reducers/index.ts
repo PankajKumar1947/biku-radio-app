@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import playStationDataReducer from '../slices/playstationDataSlice';
 import playingSongReducer from '../slices/playingSongSlice';
+import favouriteSongReducer from '../slices/favouriteSongSlice';
 
 export const store = configureStore({
     reducer: {
         playstationData: playStationDataReducer,
-        playingSong: playingSongReducer
+        playingSong: playingSongReducer,
+        favouriteSong: favouriteSongReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

@@ -24,6 +24,7 @@ import Topics from '../components/Topics';
 import DeviceInfo from 'react-native-device-info';
 import firestore from '@react-native-firebase/firestore';
 import Dialog from '../components/Dialog';
+import analytics from '@react-native-firebase/analytics';
 
 const HomeScreen = () => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -65,6 +66,19 @@ const HomeScreen = () => {
                     message: versions?.docs[0]?.data()?.message
                 })
             }
+
+            //firebase analytics -> sending ip address and mobile name
+            await analytics().logEvent('device_info', {
+                ip_address: DeviceInfo.getIpAddress(),
+                mobile_name: DeviceInfo.getDeviceName(),
+                version: DeviceInfo.getVersion(),
+                model: DeviceInfo.getModel(),
+                brand: DeviceInfo.getBrand(),
+                systemName: DeviceInfo.getSystemName(),
+                systemVersion: DeviceInfo.getSystemVersion(),
+                buildNumber: DeviceInfo.getBuildNumber(),
+                localizedModel: DeviceInfo.getDeviceId(),
+            })            
         }
         versionMatch();
     },[])

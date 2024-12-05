@@ -4,7 +4,8 @@ import Snackbar from "react-native-snackbar";
 export interface FavouriteSongState {
     stationuuid: string,
     name: string,
-    url_resolved: string
+    url_resolved: string,
+    favicon: string
 }
 
 const favouriteSongSlice = createSlice({

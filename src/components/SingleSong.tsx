@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
-import { setPlayingSongId, setPlayingSongName, setPlayingSongUrl } from '../slices/playingSongSlice';
+import { setFavicon, setPlayingSongId, setPlayingSongName, setPlayingSongUrl } from '../slices/playingSongSlice';
 import Snackbar from 'react-native-snackbar';
 
 const SingleSong = ({ station }: any) => {
@@ -30,6 +30,7 @@ const SingleSong = ({ station }: any) => {
         dispatch(setPlayingSongUrl(station?.url_resolved));
         dispatch(setPlayingSongId(station?.stationuuid));
         dispatch(setPlayingSongName(station?.name));
+        dispatch(setFavicon(station?.favicon));
 
         // @ts-ignore
         navigation.navigate('player')
@@ -38,10 +39,10 @@ const SingleSong = ({ station }: any) => {
         <View style={playingSong?.playingSongId === station?.stationuuid ? [styles.songTrack, styles.playingSongTrack] : styles.songTrack}>
             <TouchableOpacity
                 onPress={setPlayingSong}
-                style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 7, flex: 1 }}>
                 <Image
                     style={styles.tinyLogo}
-                    source={require('../assets/songicon.jpg')} />
+                    source={station?.favicon ? { uri: station?.favicon } : require('../assets/songicon.jpg')} />
                 <Text style={styles.songTitle}>{station?.name}</Text>
             </TouchableOpacity>
             <Text style={styles.options}>⋮</Text>
@@ -59,8 +60,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#121213',
         paddingRight: 20,
         marginHorizontal: 10,
-        borderRadius: 20,
-        borderWidth: 0.5,
+        borderRadius: 10,
+        marginBottom: 5,
         borderColor: '#D7007D',
         overflow: 'hidden'
     },
@@ -70,6 +71,9 @@ const styles = StyleSheet.create({
     tinyLogo: {
         width: 50,
         height: 50,
+        borderRadius: 10,
+        borderWidth: 0.2,
+        borderColor: '#D7007D'
     },
     songTitle: {
         fontSize: 18,

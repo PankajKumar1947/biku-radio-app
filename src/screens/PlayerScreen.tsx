@@ -72,7 +72,8 @@ const PlayerScreen = ({ route }: any) => {
             stationuuid: stationId,
             name: stationName,
             url_resolved: stationUrl,
-            navigation: navigation
+            navigation: navigation,
+            favicon: playingSong?.favicon
         }
 
         dispatch(addFavouriteSong(payLoad));

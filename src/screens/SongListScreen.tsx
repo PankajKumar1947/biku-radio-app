@@ -12,6 +12,7 @@ const SongListScreen = ({ route }: any) => {
     const playStationData = playStation.playstationData;
     const loading = playStation.loading;
     const [searchInput, setSearchInput] = useState('');
+    const playingSong = useSelector((state: any) => state.playingSong);
 
     const filteredData = genre === "All" ?
         playStationData?.filter((item: any) => item?.name.toLowerCase().includes(searchInput.toLowerCase()))
@@ -25,7 +26,7 @@ const SongListScreen = ({ route }: any) => {
                     genre === "All" && <Navbar searchInput={searchInput} setSearchInput={setSearchInput} />
                 }
                 {
-                    loading ? <Loader /> : <View style={styles.container}>
+                    loading ? <Loader /> : <View style={[styles.container, playingSong?.playingSongUrl && { paddingBottom:70}]}>
                         <FlatList
                             data={filteredData}
                             renderItem={({ item }) => <SingleSong station={item} />}
@@ -46,6 +47,6 @@ const styles = StyleSheet.create({
         flex: 1,
         minHeight: 680,
         backgroundColor: 'black',
-        paddingBottom:20
+        paddingBottom: 20
     },
 })

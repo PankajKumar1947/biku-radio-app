@@ -8,7 +8,8 @@ const playingSongSlice = createSlice({
         playingSongName: '',
         loadingSong: false,
         mutedAudio: false,
-        isPlayingSong: false
+        isPlayingSong: false,
+        favicon: '',
     },
     reducers: {
         setPlayingSongUrl: (state, action) => { 
@@ -29,6 +30,9 @@ const playingSongSlice = createSlice({
         setIsPlayingSong: (state, action) => { 
             state.isPlayingSong = action.payload 
         },
+        setFavicon: (state, action) => { 
+            state.favicon = action.payload 
+        },
     }
 })
 
@@ -38,7 +42,8 @@ export const {
     setPlayingSongName, 
     setLoadingSong,
     setMutedAudio,
-    setIsPlayingSong
+    setIsPlayingSong,
+    setFavicon
 } = playingSongSlice.actions
 
 export default playingSongSlice.reducer;

@@ -25,6 +25,7 @@ import DeviceInfo from 'react-native-device-info';
 import firestore from '@react-native-firebase/firestore';
 import Dialog from '../components/Dialog';
 import analytics from '@react-native-firebase/analytics';
+import SplashScreen from 'react-native-splash-screen';
 
 const HomeScreen = () => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -37,6 +38,7 @@ const HomeScreen = () => {
     });
 
     useEffect(() => {
+        SplashScreen.hide();
 
         const fetchData = async () => {
             dispatch(setLoading(true));

@@ -13,7 +13,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import GenreCard from '../components/GenreCard';
 import { GenreList } from '../utils/genre';
-import { useEffect } from 'react';
+import { useEffect, useState, version } from 'react';
 import { fetchPlayStation } from '../services/fetchPlayStation';
 import { useDispatch } from 'react-redux';
 import { addPlaystationData, setLoading } from '../slices/playstationDataSlice';
@@ -21,9 +21,14 @@ import PlayingBar from '../components/PlayingBar';
 import Singer from '../components/Singer';
 import Topics from '../components/Topics';
 
+import DeviceInfo from 'react-native-device-info';
+import firestore from '@react-native-firebase/firestore';
+import Dialog from '../components/Dialog';
+
 const HomeScreen = () => {
     const isDarkMode = useColorScheme() === 'dark';
     const dispatch = useDispatch();
+    const [updateApp, setUpdateApp] = useState(false);
 
     useEffect(() => {
 
@@ -41,6 +46,22 @@ const HomeScreen = () => {
 
         fetchData();
     }, []);
+
+
+    useEffect(() => {
+        const versionMatch = async () => {
+            const versions = await firestore().collection('versions').get();
+
+            if (versions?.docs[0]?.data()?.version !== DeviceInfo.getVersion()) {
+                setUpdateApp(true);
+                console.log("update app");
+            }
+
+            console.log("versions", versions?.docs[0]?.data());
+            console.log("device info",DeviceInfo.getVersion());
+        }
+        versionMatch();
+    },[])
 
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.black : Colors.black,
@@ -83,6 +104,8 @@ const HomeScreen = () => {
             <View style={styles.playingBar}>
                 <PlayingBar />
             </View>
+
+            <Dialog updateApp={updateApp}/>
         </SafeAreaView>
     )
 }

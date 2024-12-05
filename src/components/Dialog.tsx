@@ -1,25 +1,26 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, View, TouchableOpacity, Dimensions, Linking } from 'react-native';
 
-const Dialog = ({ updateApp }: { updateApp: boolean }) => {
+const Dialog = ({ updateApp }: any) => {
     const { height, width } = Dimensions.get('window');
 
     return (
         <Modal
-            visible={updateApp}
+            visible={updateApp?.updateApp}
             transparent
             animationType="slide"
         >
             <View style={[styles.modalContainer, { height, width }]}>
                 <View style={styles.modalContent}>
                     <Text style={styles.title}>Update Available</Text>
+                    <Text style={{ fontSize: 20, marginBottom: 10, color: '#D7007D' }}>Version {updateApp?.version}</Text>
                     <Text style={styles.description}>
-                        A new version of the app is available. Please update to enjoy the latest features and improvements.
+                        {updateApp?.message}
                     </Text>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             style={styles.updateButton}
-                            onPress={() => Linking.openURL('https://example.com/download')} // Replace with your app's download link
+                            onPress={() => Linking.openURL(updateApp?.url)} // Replace with your app's download link
                         >
                             <Text style={styles.buttonText}>Update Now</Text>
                         </TouchableOpacity>
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     modalContent: {
         width: '80%',
         padding: 20,
-        backgroundColor: 'grey',
+        backgroundColor: '#0B192C',
         borderRadius: 10,
         alignItems: 'center',
         shadowColor: '#000',
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     },
     title: {
         fontSize: 28,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         color: '#D7007D',
     },
     description: {
-        fontSize: 18,
+        fontSize: 17,
         textAlign: 'center',
         color: 'white',
         marginBottom: 20,

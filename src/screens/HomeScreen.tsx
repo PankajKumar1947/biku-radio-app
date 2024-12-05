@@ -28,7 +28,12 @@ import Dialog from '../components/Dialog';
 const HomeScreen = () => {
     const isDarkMode = useColorScheme() === 'dark';
     const dispatch = useDispatch();
-    const [updateApp, setUpdateApp] = useState(false);
+    const [updateApp, setUpdateApp] = useState({
+        updateApp: false,
+        url: '',
+        version: '',
+        message: ''
+    });
 
     useEffect(() => {
 
@@ -53,12 +58,13 @@ const HomeScreen = () => {
             const versions = await firestore().collection('versions').get();
 
             if (versions?.docs[0]?.data()?.version !== DeviceInfo.getVersion()) {
-                setUpdateApp(true);
-                console.log("update app");
+                setUpdateApp({
+                    updateApp: true,
+                    url: versions?.docs[0]?.data()?.url,
+                    version: versions?.docs[0]?.data()?.version,
+                    message: versions?.docs[0]?.data()?.message
+                })
             }
-
-            console.log("versions", versions?.docs[0]?.data());
-            console.log("device info",DeviceInfo.getVersion());
         }
         versionMatch();
     },[])

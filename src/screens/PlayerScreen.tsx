@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { muteSound, startPlayer, stopPlayer } from '../services/audioControls';
 import { addFavouriteSong, FavouriteSongState } from '../slices/favouriteSongSlice';
 import { useNavigation } from '@react-navigation/native';
+import { truncateString } from '../utils/common';
 
 const PlayerScreen = ({ route }: any) => {
     const playingSong = useSelector((state: any) => state.playingSong);
@@ -94,7 +95,7 @@ const PlayerScreen = ({ route }: any) => {
                             style={styles.playingImg}
                             source={require('../assets/songicon.jpg')} />
                         <View>
-                            <Text style={styles.stationName}>{stationName}</Text>
+                            <Text style={styles.stationName}>{truncateString(stationName, 30)}</Text>
                         </View>
                         <LottieView
                             style={styles.lottieStyle}

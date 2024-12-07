@@ -1,80 +1,141 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# **Biku Radio**
 
-# Getting Started
+A **React Native** project for a radio streaming application. This app fetches radio station data from an external API and provides features like genre selection, artist-based exploration, favorites management, and trending stations.  
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+It uses **Firebase** for version management updates and **Google Analytics** to track active users.
 
-## Step 1: Start the Metro Server
+---
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## **Table of Contents**
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Features](#features)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Contributing](#contributing)
+
+---
+
+## **Getting Started**
+
+To get started, ensure your development environment is configured as per the [React Native Environment Setup](https://reactnative.dev/docs/environment-setup) guide. Complete the setup up to the **"Creating a New Application"** step before proceeding.
+
+### **Step 1: Start Metro Server**
+Metro is the JavaScript bundler for React Native projects. Start it using the following command from the project’s root directory:
 
 ```bash
-# using npm
+# Using npm
 npm start
 
 # OR using Yarn
 yarn start
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
 
 If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+### **Step 2: Launch the Application**
+With Metro Bundler running in one terminal, open another terminal and run the following commands to start the app on your target platform:
 
-## Step 3: Modifying your App
+```bash
+   # Using npm
+   npm run android
 
-Now that you have successfully run the app, let's modify it.
+   # OR using Yarn
+   yarn android
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Project Structure
 
-## Congratulations! :tada:
+The project is structured as follows:
 
-You've successfully run and modified your React Native App. :partying_face:
+Biku Radio
+├── android                # ---> Android-specific files
+├── ios                    # ---> iOS-specific files
+├── src
+│   ├── assets             # ---> Contains app assets (images, icons, etc.)
+│   ├── components         # ---> Reusable UI components
+│   ├── navigation         # ---> App navigation and routing logic
+│   ├── reducers           # ---> Redux reducers for state management
+│   ├── screens            # ---> App screens (pages)
+│   ├── services           # ---> Audio controls and API integration for radio stations
+│   └── utils              # ---> Utility functions
+├── tests                  # ---> Unit and integration tests
 
-### Now what?
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## Features
+**Radio Streaming**: Play live radio stations.
+**Choose by Genre**: Filter and select radio stations by genre.
+**Choose by Artist**: Explore and play stations based on artists.
+**Favorites Management**: Add and manage favorite stations.
+**Search Functionality**: Search for radio stations.
+**Trending Stations**: View popular stations.
+**Popular Stations**: Highlight most-listened stations.
 
-# Troubleshooting
+## Dependencies
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+The project uses the following dependencies:
 
-# Learn More
+### 1. `react-native` (0.68.2)
+React Native framework for building native mobile apps.
 
-To learn more about React Native, take a look at the following resources:
+### 2. `react-native-track-player` (2.0.0)
+Audio player library for React Native, providing a simple and efficient way to play audio files.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# pkradio-app
+### 3. `react-redux` (7.2.6)
+Redux library for state management, providing a predictable and efficient way to manage global state.
+
+### 4. `redux-persist` (6.0.0)
+Redux persistence library, providing a way to persist and rehydrate state across app restarts.
+
+### 5. `@react-native-firebase/analytics` (12.0.0)
+Firebase analytics library, providing a way to track app events and user behavior.
+
+### 6. `@react-native-firebase/app` (12.0.0)
+Firebase app library, providing a way to initialize and configure Firebase services.
+
+### 7. `@react-native-firebase/firestore` (12.0.0)
+Firebase Firestore library, providing a way to store and retrieve data in a NoSQL database.
+
+### 8. `react-native-vector-icons` (9.1.0)
+Icon library for React Native, providing a set of icons and a way to use them in the app.
+
+### 9. `react-native-splash-screen` (3.2.0)
+Splash screen library for React Native, providing a way to display a splash screen while the app is loading.
+
+## Installation
+
+To install the project, run the following command:
+
+```bash
+npm install
+```
+
+## Usage
+
+To use the app, simply run the following command:
+
+```bash
+npm start
+```
+
+## Testing
+
+To run the tests, use the following command:
+
+```bash
+npm test
+```
+
+## Contributing
+Contributions are welcome! To contribute:
+
+- Fork the repository.
+- Create a new branch for your feature/fix.
+- Commit your changes with a clear message.
+- Open a pull request with detailed changes.
+- For major changes, please open an issue first to discuss what you would like to change.

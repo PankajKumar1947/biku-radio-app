@@ -53,18 +53,17 @@ With Metro Bundler running in one terminal, open another terminal and run the fo
 
 The project is structured as follows:
 
-Biku Radio
-├── android                # ---> Android-specific files
-├── ios                    # ---> iOS-specific files
-├── src
-│   ├── assets             # ---> Contains app assets (images, icons, etc.)
-│   ├── components         # ---> Reusable UI components
-│   ├── navigation         # ---> App navigation and routing logic
-│   ├── reducers           # ---> Redux reducers for state management
-│   ├── screens            # ---> App screens (pages)
-│   ├── services           # ---> Audio controls and API integration for radio stations
-│   └── utils              # ---> Utility functions
-├── tests                  # ---> Unit and integration tests
+* android: Android-specific files
+* ios: iOS-specific files
+* src: Source code for the app
+   + assets : Contain the assets
+	+ components: Reusable UI components
+   + navigation: contain the routing
+	+ reducers: Redux reducers
+   + screens : Contains all the screen in the app
+	+ services: Audio control services and fetching the Radio playstation data
+	+ utils: Utility functions
+* tests: Unit tests and integration tests
 
 
 ## Features

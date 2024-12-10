@@ -4,6 +4,9 @@ A **React Native** project for a radio streaming application. This app fetches r
 
 It uses **Firebase** for version management updates and **Google Analytics** to track active users.
 
+<h2>App Demo</h2>
+https://github.com/user-attachments/assets/ef0c4a56-7fdb-4e8b-8502-19719858fd61
+
 <h2>Snapshots of the App:</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
   <img src="https://github.com/user-attachments/assets/71a94d59-4ef2-4a2d-a4e2-e5570cd2799f" alt="1" width="200">
